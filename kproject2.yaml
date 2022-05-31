@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kproject2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kproject2
+  template:
+    metadata:
+      labels:
+        app: kproject2
+    spec:
+      containers:
+      - name: kproject2
+        image: mayankgajpal/kproject:flask_OCR
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
