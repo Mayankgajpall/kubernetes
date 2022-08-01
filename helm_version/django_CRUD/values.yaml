@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: mayankgajpal/kproject:django_CRUD
+
+service:
+  type: LoadBalancer
+  port: 8000
+  name: kproject1-service
+  targetport: 8000
+  nodeport: 30000
+
+container:
+  name: kproject1
+  resources:
+    memory: 128Mi
+    cpu: 500m
