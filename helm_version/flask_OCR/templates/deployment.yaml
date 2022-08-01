@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "flask_OCR.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "flask_OCR.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.container.name }}
+        image: {{ .Values.image.repository }}
+        resources:
+          limits:
+            memory: {{ .Values.container.resources.memory | quote }}
+            cpu: {{ .Values.container.resources.cpu | quote }}
+        ports:
+        - containerPort: {{ .Values.service.targetport }}
